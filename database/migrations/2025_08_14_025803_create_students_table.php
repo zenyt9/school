@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('students', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             $table->id();
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->date('birthday');
-            $table->string('gender')->nullable();
-           $table->foreignId('angi_id')
-            ->nullable()
-            ->constrained('school_classes')
-            ->onDelete('cascade');
-            $table->string('phone')->nullable();
-            $table->string('image')->nullable();
+            $table->string('firstname'); // нэр
+            $table->string('lastname'); // овог
+            $table->string('license_number')->nullable(); // үнэмлэхний дугаар
+            $table->string('phone')->nullable(); // утас
+            $table->string('email')->nullable(); // имэйл
+            $table->text('address')->nullable(); // хаяг
+            $table->string('image')->nullable(); // зураг
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('students');
+        Schema::dropIfExists('customers');
     }
 };

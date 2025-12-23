@@ -11,15 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('cars', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('description')->nullable();
-            $table->foreignId('teacher_id')
-      ->nullable()
-      ->constrained('teachers')
-      ->nullOnDelete(); // cascade биш nullOnDelete нь insert-д саад болохгүй
-
+            $table->string('brand'); // брэнд: Toyota, BMW
+            $table->string('model'); // модел: Camry, X5
+            $table->string('year'); // үйлдвэрлэсэн он
+            $table->string('plate_number')->unique(); // дугаар
+            $table->string('color')->nullable(); // өнгө
+            $table->integer('seats')->default(5); // суудлын тоо
+            $table->text('features')->nullable(); // онцлог
+            $table->decimal('daily_rate', 10, 2); // өдрийн үнэ
+            $table->string('status')->default('available'); // available, rented, maintenance
+            $table->string('image')->nullable(); // зураг
+            $table->foreignId('category_id')
+                ->nullable()
+                ->constrained('car_categories')
+                ->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -29,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('cars');
     }
 };

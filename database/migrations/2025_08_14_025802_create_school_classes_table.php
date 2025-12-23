@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('school_classes', function (Blueprint $table) {
+        Schema::create('car_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // жишээ: 10a
-            $table->text('tailbar')->nullable(); // тайлбар (nullable)
+            $table->string('name'); // жишээ: SUV, Sedan, Truck
+            $table->text('description')->nullable(); // тайлбар
+            $table->decimal('daily_rate', 10, 2)->default(0); // өдрийн түрээсийн үнэ
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('school_classes');
+        Schema::dropIfExists('car_categories');
     }
 };

@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SchoolClassController;
-use App\Http\Controllers\TeacherController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\StudentController;
-use App\Http\Controllers\EnrollmentController;
-use App\Http\Controllers\CourseSelectionController;
+use App\Http\Controllers\CarCategoryController;
+use App\Http\Controllers\DriverController;
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\RentalController;
+use App\Http\Controllers\BookingController;
 
 // Welcome page
 Route::get('/', function () {
@@ -14,12 +14,9 @@ Route::get('/', function () {
 })->name('welcome');
 
 // Resource routes
-Route::resource('angi', SchoolClassController::class);
-Route::resource('teacher', TeacherController::class);
-Route::resource('hicheel', SubjectController::class);
-Route::resource('student', StudentController::class);
-Route::resource('elselt', EnrollmentController::class);
-Route::resource('hicheel_songolt', CourseSelectionController::class);
-
-
-
+Route::resource('categories', CarCategoryController::class);
+Route::resource('drivers', DriverController::class);
+Route::resource('cars', CarController::class);
+Route::resource('customers', CustomerController::class);
+Route::resource('rentals', RentalController::class);
+Route::resource('bookings', BookingController::class);

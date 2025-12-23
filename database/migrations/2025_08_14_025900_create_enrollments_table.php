@@ -11,29 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('enrollments', function (Blueprint $table) {
+        Schema::create('rentals', function (Blueprint $table) {
             $table->id();
 
-            // Оюутны мэдээлэл
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-
-            // Анги болон хичээл
-            $table->foreignId('school_class_id')
+            // Үйлчлүүлэгч болон машин
+            $table->foreignId('customer_id')
                   ->nullable()
-                  ->constrained('school_classes')
-                  ->nullOnDelete(); // Анги устсан ч элсэлт үлдэх
+                  ->constrained('customers')
+                  ->nullOnDelete();
 
-            $table->foreignId('subject_id')
+            $table->foreignId('car_id')
                   ->nullable()
-                  ->constrained('subjects')
-                  ->nullOnDelete(); // Хичээл устсан ч элсэлт үлдэх
+                  ->constrained('cars')
+                  ->nullOnDelete();
 
-            // Элсэлттэй холбоотой нэмэлт мэдээлэл
-            $table->string('semester');
-            $table->integer('year');
+            // Түрээсийн мэдээлэл
+            $table->date('start_date'); // эхлэх огноо
+            $table->date('end_date'); // дуусах огноо
+            $table->integer('days')->default(1); // хоног
+            $table->decimal('daily_rate', 10, 2); // өдрийн үнэ
+            $table->decimal('total_cost', 10, 2); // нийт үнэ
+            $table->string('status')->default('active'); // active, completed, cancelled
+            $table->text('notes')->nullable(); // тэмдэглэл
 
             $table->timestamps();
         });
@@ -44,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('enrollments');
+        Schema::dropIfExists('rentals');
     }
 };

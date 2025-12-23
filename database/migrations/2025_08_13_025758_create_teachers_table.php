@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teachers', function (Blueprint $table) {
+        Schema::create('drivers', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // багшийн нэр
+            $table->string('name'); // жолоочийн нэр
+            $table->string('license_number')->nullable(); // үнэмлэхний дугаар
             $table->string('email')->nullable(); // имэйл
             $table->string('phone')->nullable(); // утас
-            $table->timestamps(); // created_at, updated_at
+            $table->text('address')->nullable(); // хаяг
+            $table->timestamps();
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teachers');
+        Schema::dropIfExists('drivers');
     }
 };
